@@ -14,7 +14,10 @@ public class StringManipulator {
    * @param input - The string to be reversed.
    * @return - The reversed string.
    */
-  public String reverseString(String input) {}
+  public String reverseString(String input) {
+    String manipulatedString = new StringBuilder(input).reverse().toString();
+    return manipulatedString;
+  }
 
   /**
    * This method will duplicate the input string.
@@ -52,7 +55,19 @@ public class StringManipulator {
    * @param input - The string to be modified.
    * @return - The manipulated string.
    */
-  public String vowelsToSymbols(String input) {}
+  public String vowelsToSymbols(String input) {
+    String manipulatedString = input.replace("A", "?")
+                                    .replace("a", "=")
+                                    .replace("E", ")")
+                                    .replace("e", "(")
+                                    .replace("I", "!")
+                                    .replace("i", "@")
+                                    .replace("O", "&")
+                                    .replace("o", "/")
+                                    .replace("U", "*")
+                                    .replace("u", "%");
+    return manipulatedString;
+  }
 
   /**
    * This method will insert a pre-defined String into the middle of the input string.
