@@ -125,11 +125,34 @@ public class StringManipulator {
    * Functions to Undo Manipulations.
    */
 
-  public String undoDuplicateString(String manipulatedString) {}
+  public String undoDuplicateString(String manipulatedString) {
+    int removeDuplication = manipulatedString.length() / 2;
+    String originalInput = manipulatedString.substring(0, removeDuplication);
+    return originalInput;
+  }
 
-  public String undoRotateCharacters(String manipulatedString, int stepsToRotate) {}
+  /**
+   * For this function to work as intended, it is important that the value of stepsToRotate
+   * has the same value as it had when used in rotateCharacters.
+   */
+  public String undoRotateCharacters(String manipulatedString, int stepsToRotate) {
+    String originalInput = rotateCharacters(manipulatedString, manipulatedString.length() - stepsToRotate);
+    return originalInput;
+  }
 
-  public String undoVowelsToSymbols(String manipulatedString) {}
+  public String undoVowelsToSymbols(String manipulatedString) {
+    String originalInput = manipulatedString.replace("?", "A")
+                                                 .replace("=", "a")
+                                                 .replace(")", "E")
+                                                 .replace("(", "e")
+                                                 .replace("I", "!")
+                                                 .replace("@", "i")
+                                                 .replace("&", "O")
+                                                 .replace("/", "o")
+                                                 .replace("*", "U")
+                                                 .replace("%", "u");
+    return originalInput;
+  }
 
   public String undoInsertPhrase(String manipulatedString) {}
 
