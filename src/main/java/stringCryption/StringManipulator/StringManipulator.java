@@ -38,7 +38,19 @@ public class StringManipulator {
    * @param input - The string to be modified.
    * @return - The manipulated string.
    */
-  public String swapCase(String input) {}
+  public String swapCase(String input) {
+    char[] inputStringToCharacters = input.toCharArray();
+    for (int i = 0; i < inputStringToCharacters.length; i++) {
+      char characterInInput = inputStringToCharacters[i];
+      if (Character.isUpperCase(characterInInput)) {
+        inputStringToCharacters[i] = Character.toLowerCase(characterInInput);
+      } else if (Character.isLowerCase(characterInInput)) {
+        inputStringToCharacters[i] = Character.toUpperCase(characterInInput);
+      }
+    }
+    String manipulatedString = new String(inputStringToCharacters);
+    return manipulatedString;
+  }
 
   /**
    * This method will rotate the characters in a string by a specified number of steps.
