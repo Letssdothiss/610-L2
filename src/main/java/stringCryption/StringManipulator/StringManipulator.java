@@ -9,8 +9,15 @@ public class StringManipulator {
   private String phrase = "!#THTRJYDHGS#¤%&UHDAWE35ythrsr563423435ythgfds";
 
   /**
+   * Manipulations.
+   */
+
+  /**
    * This method will reverse the input string.
    *
+   * To undo the reversed string, call this method again with 
+   * the manipulated string as the argument.
+   * 
    * @param input - The string to be reversed.
    * @return - The reversed string.
    */
@@ -33,7 +40,8 @@ public class StringManipulator {
   /**
    * Changes upper case to lower case and vice versa.
    * 
-   * To undo the swap, call this method again.
+   * To undo the case swap, call this method again on with
+   * the manipulated string as the argument.
    *
    * @param input - The string to be modified.
    * @return - The manipulated string.
@@ -113,4 +121,17 @@ public class StringManipulator {
     return manipulatedString.toString();
   }
 
+  /**
+   * Functions to Undo Manipulations.
+   */
+
+  public String undoDuplicateString(String manipulatedString) {}
+
+  public String undoRotateCharacters(String manipulatedString, int stepsToRotate) {}
+
+  public String undoVowelsToSymbols(String manipulatedString) {}
+
+  public String undoInsertPhrase(String manipulatedString) {}
+
+  public String undoStringToCamelCase(String manipulatedString) {}
 }
