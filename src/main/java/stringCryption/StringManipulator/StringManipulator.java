@@ -6,7 +6,7 @@ public class StringManipulator {
    *
    * @type {String}
    */
-  private String phrase = "This is a phrase, it will change";
+  private String phrase = "!#THTRJYDHGS#¤%&UHDAWE35ythrsr563423435ythgfds";
 
   /**
    * This method will reverse the input string.
@@ -47,7 +47,15 @@ public class StringManipulator {
    * @param stepsToRotate - The number of steps to rotate the characters.
    * @return - The manipulated string.
    */
-  public String rotateCharacters(String input, int stepsToRotate) {}
+  public String rotateCharacters(String input, int stepsToRotate) {
+    int length = input.length();
+    // Modulo is used to prevent unnecessary rotations, 
+    // while still modifying the string to the requested position.
+    stepsToRotate = stepsToRotate % length;
+    // (Characters to move) + (input string - characters to move)
+    String manipulatedString = input.substring(length - stepsToRotate) + input.substring(0, length - stepsToRotate);
+    return manipulatedString;
+  }
 
   /**
    * This method will replace all vowels in a string with a specified symbol.
@@ -75,7 +83,11 @@ public class StringManipulator {
    * @param input - The string to be modified.
    * @return - The manipulated string.
    */
-  public String insertPhrase(String input) {}
+  public String insertPhrase(String input) {
+    int middle = input.length() / 2;
+    String manipulatedString = input.substring(0, middle) + phrase + input.substring(middle);
+    return manipulatedString;
+  }
 
   public String StringToCamelCase(String input) {}
 
