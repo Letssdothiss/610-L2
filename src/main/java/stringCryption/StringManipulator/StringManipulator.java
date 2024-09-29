@@ -9,7 +9,7 @@ public class StringManipulator {
   private String phrase = "!#THTRJYDHGS#¤%&UHDAWE35ythrsr563423435ythgfds";
 
   /**
-   * Manipulations.
+   * Functions to Perform Manipulations.
    */
 
   /**
@@ -109,6 +109,10 @@ public class StringManipulator {
     return manipulatedString;
   }
 
+  /**
+   * Note: This method (and its undo counter part) is flawed at the moment and requires a specific input format to be restored correctly.
+   * The original string must be in a format where all words are lower cased and words are separated by spaces.
+   */
   public String stringToCamelCase(String input) {
     // Regular expression is intended to match one or more white space occurances.
     String[] words = input.split("\\s+");
@@ -154,7 +158,33 @@ public class StringManipulator {
     return originalInput;
   }
 
-  public String undoInsertPhrase(String manipulatedString) {}
+  public String undoInsertPhrase(String manipulatedString) {
+    String originalInput = manipulatedString.replace(phrase, "");
+    return originalInput;
+  }
 
-  public String undoStringToCamelCase(String manipulatedString) {}
+  /**
+   * This method will undo the camel case manipulation.
+   *
+   * It splits the string att upper case letters and joins the with spaces,
+   * converting the words to lower case.
+   *
+   * Note: This method is flawed and cannot guarantee that the original string will be restored exactly
+   * as it was before the camel case conversion. It returns a readable sentence with spaces
+   * between words and the first word in lowercase.
+   *
+   * @param manipulatedString - The string to be restored.
+   * @return - Intended: The original String, else: readable string.
+   */
+  public String undoStringToCamelCase(String manipulatedString) {
+    // Regular expression intended to split string at each upper case letter.
+    String[] words = manipulatedString.split("(?=[A-Z])");
+    // Appends all the words in lower case as a regular sentence,
+    // without a capital letter at the start.
+    StringBuilder originalString = new StringBuilder(words[0]);
+    for (int i = 1; i < words.length; i++) {
+      originalString.append(" ").append(words[i].toLowerCase());
+    }
+    return originalString.toString();
+  }
 }
