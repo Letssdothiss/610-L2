@@ -22,7 +22,10 @@ public class StringManipulator {
    * @param input - The string to be duplicated.
    * @return - The duplicated string.
    */
-  public String duplicateString(String input) {}
+  public String duplicateString(String input) {
+    String manipulatedString = input + input;
+    return manipulatedString;
+  }
 
   /**
    * Changes upper case to lower case and vice versa.
@@ -30,7 +33,7 @@ public class StringManipulator {
    * To undo the swap, call this method again.
    *
    * @param input - The string to be modified.
-   * @return - The modified string.
+   * @return - The manipulated string.
    */
   public String swapCase(String input) {}
 
@@ -39,7 +42,7 @@ public class StringManipulator {
    * 
    * @param input - The string to be modified.
    * @param stepsToRotate - The number of steps to rotate the characters.
-   * @return - The modified string.
+   * @return - The manipulated string.
    */
   public String rotateCharacters(String input, int stepsToRotate) {}
 
@@ -47,7 +50,7 @@ public class StringManipulator {
    * This method will replace all vowels in a string with a specified symbol.
    *
    * @param input - The string to be modified.
-   * @return - The modified string.
+   * @return - The manipulated string.
    */
   public String vowelsToSymbols(String input) {}
 
@@ -55,22 +58,10 @@ public class StringManipulator {
    * This method will insert a pre-defined String into the middle of the input string.
    *
    * @param input - The string to be modified.
-   * @return - The modified string.
+   * @return - The manipulated string.
    */
   public String insertPhrase(String input) {}
 
-  /**
-   * This method will format a string to camel case.
-   *
-   * @param input - The string to be modified.
-   * @return - The modified string.
-   */
   public String StringToCamelCase(String input) {}
-
-  public String StringToUpperCase(String input) {}
-
-  public String StringToLowerCase(String input) {}
-
-  public String removeWhiteSpaces(String input) {}
 
 }
