@@ -89,6 +89,16 @@ public class StringManipulator {
     return manipulatedString;
   }
 
-  public String StringToCamelCase(String input) {}
+  public String stringToCamelCase(String input) {
+    // Regular expression is intended to match one or more white space occurances.
+    String[] words = input.split("\\s+");
+    // First word in camelCase is lower case.
+    StringBuilder manipulatedString = new StringBuilder(words[0].toLowerCase());
+    for (int i = 1; i < words.length; i++) {
+      manipulatedString.append(words[i].substring(0, 1).toUpperCase());
+      manipulatedString.append(words[i].substring(1).toLowerCase());
+    }
+    return manipulatedString.toString();
+  }
 
 }
