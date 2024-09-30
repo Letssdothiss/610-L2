@@ -6,29 +6,50 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class StringManipulatorTest {
+
+  private StringManipulator manipulator;
+
+  @BeforeEach
+  public void setUp() {
+    manipulator = new StringManipulator();
+  }
     
-  // testReverseString - both ways to exhaust test, since the methos is used for both encryption and decryption
+  // Test both ways to exhaust test, since the method is used for both encryption and decryption.
+  @Test
+  public void testReverseString() {}
 
-  // testDuplicateString
+  @Test
+  public void testDuplicateString() {}
 
-  // testSwapCase
+  // Test both ways to exhaust test, since the method is used for both encryption and decryption.
+  @Test
+  public void testSwapCase() {}
 
-  // testRotateCharacters
+  @Test
+  public void testRotateCharacters() {}
 
-  // testVowelsToSymbols
+  @Test
+  public void testVowelsToSymbols() {}
 
-  // testInsertPhrase
+  @Test
+  public void testInsertPhrase() {}
 
-  // testStringToCamelCase
+  @Test
+  public void testStringToCamelCase() {}
 
-  // testUndoDuplicateString
+  @Test
+  public void testUndoDuplicateString() {}
 
-  // testUndoRotateCharacters
+  @Test
+  public void testUndoRotateCharacters() {}
 
-  // testUndoVowelsToSymbolsg
+  @Test
+  public void testUndoVowelsToSymbols() {}
 
-  // testUndoInsertPhrase
+  @Test
+  public void testUndoInsertPhrase() {}
 
-  // testUndoStringToCamelCase
+  @Test
+  public void testUndoStringToCamelCase() {}
 
 }
