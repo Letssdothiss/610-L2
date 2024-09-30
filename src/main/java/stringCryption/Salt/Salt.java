@@ -1,5 +1,8 @@
 package main.java.stringCryption.Salt;
 
+import java.security.SecureRandom;
+import java.util.Base64;
+
 public class Salt {
   private String salt;
 
@@ -7,20 +10,26 @@ public class Salt {
    * Generate a random salt at specified length.
    */
   private void generateSalt(int lengthOfSalt) {
+    SecureRandom randomSalt = new SecureRandom();
+    byte[] saltBytes = new byte[lengthOfSalt];
+    randomSalt.nextBytes(saltBytes);
+    this.salt = Base64.getEncoder().encodeToString(saltBytes);
   }
 
   /**
    * Combine input with salt.
    */
   private String combineSaltAndInput(String salt, String input) {
-    return input;
+    String saltedInput = salt + input;
+    return saltedInput;
   }
 
   /**
    * Remove salt from input.
    */
-  private String removeSaltFromInput(String salt, String input) {
-    return input;
+  private String removeSaltFromInput(String salt, String saltedInput) {
+    String originalInput = saltedInput.replace(salt, "");
+    return originalInput;
   }
 
   /**
@@ -33,7 +42,7 @@ public class Salt {
   /**
    * Remove Salt.
    */
-  public String removeSalt(String input) {
+  public String removeSalt(String saltedInput) {
     return input;
   }
 }
