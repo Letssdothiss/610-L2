@@ -19,8 +19,10 @@ public class StringManipulatorTest {
     // Testing both ways to exhaust test, since the method is used for both encryption and decryption.
     assertEquals(".ecnetnes a esreveR", manipulator.reverseString("Reverse a sentence."));
     assertEquals("Reverse a sentence.", manipulator.reverseString(".ecnetnes a esreveR"));
+
     assertEquals("abcde", manipulator.reverseString("edcba"));
     assertEquals("edcba", manipulator.reverseString("abcde"));
+
     assertEquals("a", manipulator.reverseString("a"));
     assertEquals("A", manipulator.reverseString("A"));
     assertEquals("", manipulator.reverseString(""));
@@ -30,6 +32,7 @@ public class StringManipulatorTest {
   public void testDuplicateString() {
     assertEquals("Duplicate a sentence.Duplicate a sentence.", manipulator.duplicateString("Duplicate a sentence."));
     assertEquals("DuplicateDuplicate", manipulator.duplicateString("Duplicate"));
+
     assertEquals("a", manipulator.duplicateString("a"));
     assertEquals("A", manipulator.duplicateString("A"));
     assertEquals("", manipulator.duplicateString(""));
@@ -40,8 +43,10 @@ public class StringManipulatorTest {
   public void testSwapCase() {
     assertEquals("iN A SENTENCE.", manipulator.swapCase("In a sentence."));
     assertEquals("In a sentence.", manipulator.swapCase("iN A SENTENCE."));
+
     assertEquals("sWAPcASE", manipulator.swapCase("SwapCase"));
     assertEquals("SwapCase", manipulator.swapCase("sWAPcASE"));
+
     assertEquals("A", manipulator.swapCase("a"));
     assertEquals("a", manipulator.swapCase("A"));
     assertEquals("!", manipulator.swapCase("!"));
@@ -49,13 +54,47 @@ public class StringManipulatorTest {
   }
 
   @Test
-  public void testRotateCharacters() {}
+  public void testRotateCharacters() {
+    assertEquals("eRotat", manipulator.rotateCharacters("Rotate", 1));
+    assertEquals("ateRot", manipulator.rotateCharacters("Rotate", 3));
+    assertEquals("tateRo", manipulator.rotateCharacters("Rotate", 10));
+
+    assertEquals("Rotate", manipulator.rotateCharacters("Rotate", 6));
+    assertEquals("Rotate", manipulator.rotateCharacters("Rotate", 0));
+    assertEquals("Rotate", manipulator.rotateCharacters("Rotate", 12));
+  }
 
   @Test
-  public void testVowelsToSymbols() {}
+  public void testVowelsToSymbols() {
+    assertEquals("?", manipulator.vowelsToSymbols("A"));
+    assertEquals("=", manipulator.vowelsToSymbols("a"));
+    assertEquals(")", manipulator.vowelsToSymbols("E"));
+    assertEquals("(", manipulator.vowelsToSymbols("e"));
+    assertEquals("!", manipulator.vowelsToSymbols("I"));
+    assertEquals("@", manipulator.vowelsToSymbols("i"));
+    assertEquals("&", manipulator.vowelsToSymbols("O"));
+    assertEquals("/", manipulator.vowelsToSymbols("o"));
+    assertEquals("*", manipulator.vowelsToSymbols("U"));
+    assertEquals("%", manipulator.vowelsToSymbols("u"));
+    assertEquals("M=n@p%l=t( = s(nt(nc(.", manipulator.vowelsToSymbols("Manipulate a sentence."));
+    assertEquals("V/c=b%l=ry", manipulator.vowelsToSymbols("Vocabulary"));
+
+    // Non-vowel characters should not be changed.
+    assertEquals("Rhythm", manipulator.vowelsToSymbols("Rhythm"));
+    assertEquals("r", manipulator.vowelsToSymbols("r"));
+    assertEquals("R", manipulator.vowelsToSymbols("R"));
+    assertEquals("!", manipulator.vowelsToSymbols("!"));
+  }
 
   @Test
-  public void testInsertPhrase() {}
+  public void testInsertPhrase() {
+    String phrase = "TESTPHRASE";
+    assertEquals("In a se" + phrase + "ntence.", manipulator.insertPhrase("In a sentence."));
+    assertEquals("Wo" + phrase + "rd", manipulator.insertPhrase("Word"));
+    assertEquals("a", manipulator.insertPhrase("a"));
+    assertEquals("!", manipulator.insertPhrase("!"));
+    assertEquals("", manipulator.insertPhrase(""));
+  }
 
   @Test
   public void testStringToCamelCase() {}
