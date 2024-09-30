@@ -149,7 +149,7 @@ public class StringManipulator {
                                                  .replace("=", "a")
                                                  .replace(")", "E")
                                                  .replace("(", "e")
-                                                 .replace("I", "!")
+                                                 .replace("!", "I")
                                                  .replace("@", "i")
                                                  .replace("&", "O")
                                                  .replace("/", "o")
