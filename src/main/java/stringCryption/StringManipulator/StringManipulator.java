@@ -6,7 +6,7 @@ public class StringManipulator {
    *
    * @type {String}
    */
-  private String phrase = "!#THTRJYDHGS#¤%&UHDAWE35ythrsr563423435ythgfds";
+  private static final String phrase = "!#THTRJYDHGS#¤%&UHDAWE35ythrsr563423435ythgfds";
 
   /**
    * Functions to Perform Manipulations.
@@ -22,17 +22,13 @@ public class StringManipulator {
    * @return - The reversed string.
    */
   public String reverseString(String input) {
-    if (input.length() < 2) {
-      throw new IllegalArgumentException("Cannot reverse a string with less than 2 characters.");
-    }
+    validateInput(input, 2, "Cannot reverse a string with less than 2 characters.");
     String manipulatedString = new StringBuilder(input).reverse().toString();
     return manipulatedString;
   }
 
   public String duplicateString(String input) {
-    if (input.length() < 1) {
-      throw new IllegalArgumentException("Cannot duplicate a string with less than 1 character/s.");
-    }
+    validateInput(input, 1, "Cannot duplicate a string with less than 1 character/s.");
     String manipulatedString = input + input;
     return manipulatedString;
   }
@@ -47,10 +43,7 @@ public class StringManipulator {
    * @return - The manipulated string.
    */
   public String swapCase(String input) {
-    if (input.length() < 1) {
-      throw new IllegalArgumentException("Cannot swap case of a string with less than 1 character/s.");
-    }
-
+    validateInput(input, 1, "Cannot swap case of a string with less than 1 character/s.");
     char[] inputStringToCharacters = input.toCharArray();
     for (int i = 0; i < inputStringToCharacters.length; i++) {
       char characterInInput = inputStringToCharacters[i];
@@ -72,10 +65,7 @@ public class StringManipulator {
    * @return - The manipulated string.
    */
   public String rotateCharacters(String input, int stepsToRotate) {
-    if (input.length() < 2) {
-      throw new IllegalArgumentException("Cannot rotate a string with less than 2 characters.");
-    }
-
+    validateInput(input, 2, "Cannot rotate a string with less than 2 characters.");
     int length = input.length();
     // Modulo is used to prevent unnecessary rotations, 
     // while still modifying the string to the requested position.
@@ -89,10 +79,7 @@ public class StringManipulator {
   }
 
   public String vowelsToSymbols(String input) {
-    if (input.length() < 1) {
-      throw new IllegalArgumentException("Cannot replace vowels in a string with less than 1 character/s.");
-    }
-
+    validateInput(input, 1, "Cannot replace vowels in a string with less than 1 character/s.");
     String manipulatedString = input.replace("A", "?")
                                     .replace("a", "=")
                                     .replace("E", ")")
@@ -107,10 +94,7 @@ public class StringManipulator {
   }
 
   public String insertPhrase(String input) {
-    if (input.length() < 2) {
-      throw new IllegalArgumentException("Cannot insert a phrase into a string with less than 2 characters.");
-    }
-
+    validateInput(input, 2, "Cannot insert a phrase into a string with less than 2 characters.");
     int middle = input.length() / 2;
     String manipulatedString = input.substring(0, middle) + phrase + input.substring(middle);
     return manipulatedString;
@@ -123,10 +107,7 @@ public class StringManipulator {
    * This method is subject to change in future iterations.
    */
   public String stringToCamelCase(String input) {
-    if (input.length() < 1) {
-      throw new IllegalArgumentException("Cannot convert a string with less than 1 character/s to camel case.");
-    }
-
+    validateInput(input, 1, "Cannot convert a string with less than 1 character/s to camel case.");
     // Regular expression is intended to match one or more white space occurances.
     String[] words = input.split("\\s+");
     // First word in camelCase is lower case.
@@ -143,10 +124,7 @@ public class StringManipulator {
    */
 
   public String undoDuplicateString(String manipulatedString) {
-    if(manipulatedString.length() < 2) {
-      throw new IllegalArgumentException("Cant remove duplication from a string with less than 2 characters.");
-    }
-
+    validateInput(manipulatedString, 2, "Cant remove duplication from a string with less than 2 characters.");
     int removeDuplication = manipulatedString.length() / 2;
     String originalInput = manipulatedString.substring(0, removeDuplication);
     return originalInput;
@@ -157,10 +135,7 @@ public class StringManipulator {
    * has the same value as it had when used in rotateCharacters.
    */
   public String undoRotateCharacters(String manipulatedString, int stepsToRotate) {
-    if (manipulatedString.length() < 2) {
-      throw new IllegalArgumentException("Cannot rotate a string with less than 2 characters.");
-    }
-
+    validateInput(manipulatedString, 2, "Cannot rotate a string with less than 2 characters.");
     int length = manipulatedString.length();
     stepsToRotate = stepsToRotate % length;
     if (stepsToRotate < 0) {
@@ -171,24 +146,22 @@ public class StringManipulator {
   }
 
   public String undoVowelsToSymbols(String manipulatedString) {
-    if (manipulatedString.length() < 1) {
-      throw new IllegalArgumentException("Cannot replace vowels in a string with less than 1 character/s.");
-    }
-
+    validateInput(manipulatedString, 1, "Cannot replace vowels in a string with less than 1 character/s.");
     String originalInput = manipulatedString.replace("?", "A")
-                                                 .replace("=", "a")
-                                                 .replace(")", "E")
-                                                 .replace("(", "e")
-                                                 .replace("!", "I")
-                                                 .replace("@", "i")
-                                                 .replace("&", "O")
-                                                 .replace("/", "o")
-                                                 .replace("*", "U")
-                                                 .replace("%", "u");
+                                            .replace("=", "a")
+                                            .replace(")", "E")
+                                            .replace("(", "e")
+                                            .replace("!", "I")
+                                            .replace("@", "i")
+                                            .replace("&", "O")
+                                            .replace("/", "o")
+                                            .replace("*", "U")
+                                            .replace("%", "u");
     return originalInput;
   }
 
   public String undoInsertPhrase(String manipulatedString) {
+    validateInput(manipulatedString, 2, "Cannot insert a phrase into a string with less than 2 characters.");
     String originalInput = manipulatedString.replace(phrase, "");
     return originalInput;
   }
@@ -209,10 +182,7 @@ public class StringManipulator {
    * @return - Intended: The original String, else: readable string.
    */
   public String undoStringToCamelCase(String manipulatedString) {
-    if (manipulatedString.length() < 1) {
-      throw new IllegalArgumentException("Cannot convert a string with less than 1 character/s to camel case.");
-    }
-
+    validateInput(manipulatedString, 1, "Cannot convert a string with less than 1 character/s to camel case.");
     // Regular expression intended to split string at each upper case letter.
     String[] words = manipulatedString.split("(?=[A-Z])");
     // Appends all the words in lower case as a regular sentence,
@@ -222,5 +192,11 @@ public class StringManipulator {
       originalString.append(" ").append(words[i].toLowerCase());
     }
     return originalString.toString();
+  }
+
+  private void validateInput(String input, int minLength, String errorMessage) {
+    if (input.length() < minLength || input .trim().isEmpty()) {
+      throw new IllegalArgumentException(errorMessage);
+    }
   }
 }

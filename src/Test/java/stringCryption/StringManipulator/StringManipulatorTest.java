@@ -23,9 +23,13 @@ public class StringManipulatorTest {
     assertEquals("abcde", manipulator.reverseString("edcba"));
     assertEquals("edcba", manipulator.reverseString("abcde"));
 
-    assertEquals("a", manipulator.reverseString("a"));
-    assertEquals("A", manipulator.reverseString("A"));
-    assertEquals("", manipulator.reverseString(""));
+    // Test for exception when input is less than 2 characters
+    assertThrows(IllegalArgumentException.class, () -> {
+      manipulator.reverseString("a");
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      manipulator.reverseString("");
+    });
   }
 
   @Test
@@ -36,7 +40,10 @@ public class StringManipulatorTest {
     assertEquals("AA", manipulator.duplicateString("A"));
     assertEquals("!!", manipulator.duplicateString("!"));
 
-    assertEquals("", manipulator.duplicateString(""));
+    // Test for exception when input is less than 1 character
+    assertThrows(IllegalArgumentException.class, () -> {
+      manipulator.duplicateString("");
+    });
   }
 
   @Test
@@ -51,7 +58,11 @@ public class StringManipulatorTest {
     assertEquals("A", manipulator.swapCase("a"));
     assertEquals("a", manipulator.swapCase("A"));
     assertEquals("!", manipulator.swapCase("!"));
-    assertEquals("", manipulator.swapCase(""));
+
+    // Test for exception when input is less than 1 character
+    assertThrows(IllegalArgumentException.class, () -> {
+      manipulator.swapCase("");
+    });
   }
 
   @Test
@@ -92,6 +103,11 @@ public class StringManipulatorTest {
     assertEquals("Rhythm", manipulator.vowelsToSymbols("Rhythm"));
     assertEquals("r", manipulator.vowelsToSymbols("r"));
     assertEquals("R", manipulator.vowelsToSymbols("R"));
+
+    // Test for exception when input is less than 1 character
+    assertThrows(IllegalArgumentException.class, () -> {
+      manipulator.vowelsToSymbols("");
+    });
   }
 
   @Test
@@ -99,9 +115,14 @@ public class StringManipulatorTest {
     String phrase = "!#THTRJYDHGS#¤%&UHDAWE35ythrsr563423435ythgfds";
     assertEquals("In a se" + phrase + "ntence.", manipulator.insertPhrase("In a sentence."));
     assertEquals("Wo" + phrase + "rd", manipulator.insertPhrase("Word"));
-    assertEquals(phrase + "a", manipulator.insertPhrase("a"));
-    assertEquals(phrase + "!", manipulator.insertPhrase("!"));
-    assertEquals(phrase, manipulator.insertPhrase(""));
+
+    // Test for exception when input is less than 2 characters
+    assertThrows(IllegalArgumentException.class, () -> {
+      manipulator.insertPhrase("a");
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      manipulator.insertPhrase("");
+    });
   }
 
   @Test
@@ -111,7 +132,11 @@ public class StringManipulatorTest {
 
     assertEquals("a", manipulator.stringToCamelCase("a"));
     assertEquals("!", manipulator.stringToCamelCase("!"));
-    assertEquals("", manipulator.stringToCamelCase(""));
+
+    // Test for exception when input is less than 1 character
+    assertThrows(IllegalArgumentException.class, () -> {
+      manipulator.stringToCamelCase("");
+    });
   }
 
   @Test
@@ -141,6 +166,14 @@ public class StringManipulatorTest {
     assertEquals("eRotat", manipulator.undoRotateCharacters("eRotat", 6));
     assertEquals("eRotat", manipulator.undoRotateCharacters("eRotat", 0));
     assertEquals("eRotat", manipulator.undoRotateCharacters("eRotat", 12));
+
+    // Test for exception when input is less than 2 characters
+    assertThrows(IllegalArgumentException.class, () -> {
+      manipulator.undoRotateCharacters("a", 1);
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      manipulator.undoRotateCharacters("", 1);
+    });
   }
 
   @Test
@@ -162,6 +195,11 @@ public class StringManipulatorTest {
     assertEquals("Rhythm", manipulator.undoVowelsToSymbols("Rhythm"));
     assertEquals("r", manipulator.undoVowelsToSymbols("r"));
     assertEquals("R", manipulator.undoVowelsToSymbols("R"));
+
+    // Test for exception when input is less than 1 character
+    assertThrows(IllegalArgumentException.class, () -> {
+      manipulator.undoVowelsToSymbols("");
+    });
   }
 
   @Test
@@ -170,9 +208,13 @@ public class StringManipulatorTest {
     assertEquals("In a sentence.", manipulator.undoInsertPhrase("In a se" + phrase + "ntence."));
     assertEquals("Word", manipulator.undoInsertPhrase("Wo" + phrase + "rd"));
 
-    assertEquals("a", manipulator.undoInsertPhrase("a"));
-    assertEquals("!", manipulator.undoInsertPhrase("!"));
-    assertEquals("", manipulator.undoInsertPhrase(""));
+    // Test for exception when input is less than 2 characters
+    assertThrows(IllegalArgumentException.class, () -> {
+      manipulator.undoInsertPhrase("a");
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      manipulator.undoInsertPhrase("");
+    });
   }
 
   @Test
@@ -183,6 +225,10 @@ public class StringManipulatorTest {
 
     assertEquals("a", manipulator.undoStringToCamelCase("a"));
     assertEquals("!", manipulator.undoStringToCamelCase("!"));
-    assertEquals("", manipulator.undoStringToCamelCase(""));
+
+    // Test for exception when input is less than 1 character
+    assertThrows(IllegalArgumentException.class, () -> {
+      manipulator.undoStringToCamelCase("");
+    });
   }
 }
