@@ -91,19 +91,45 @@ public class StringManipulatorTest {
     String phrase = "TESTPHRASE";
     assertEquals("In a se" + phrase + "ntence.", manipulator.insertPhrase("In a sentence."));
     assertEquals("Wo" + phrase + "rd", manipulator.insertPhrase("Word"));
+
     assertEquals("a", manipulator.insertPhrase("a"));
     assertEquals("!", manipulator.insertPhrase("!"));
     assertEquals("", manipulator.insertPhrase(""));
   }
 
   @Test
-  public void testStringToCamelCase() {}
+  public void testStringToCamelCase() {
+    assertEquals("camelCaseThisString.", manipulator.stringToCamelCase("Camel case this string."));
+    assertEquals("camelCase", manipulator.stringToCamelCase("CAMELcase"));
+
+    assertEquals("a", manipulator.stringToCamelCase("a"));
+    assertEquals("!", manipulator.stringToCamelCase("!"));
+    assertEquals("", manipulator.stringToCamelCase(""));
+  }
 
   @Test
-  public void testUndoDuplicateString() {}
+  public void testUndoDuplicateString() {
+    assertEquals("Duplicated string.", manipulator.undoDuplicateString("Duplicated string.Duplicated String."));
+    assertEquals("Duplicated", manipulator.undoDuplicateString("DuplicatedDuplicated"));
+
+    assertEquals("A", manipulator.undoDuplicateString("AA"));
+    assertEquals("a", manipulator.undoDuplicateString("aa"));
+    assertEquals("!", manipulator.undoDuplicateString("!!"));
+
+    assertEquals("a", manipulator.undoDuplicateString("a"));
+    assertEquals("", manipulator.undoDuplicateString(""));
+  }
 
   @Test
-  public void testUndoRotateCharacters() {}
+  public void testUndoRotateCharacters() {
+    assertEquals("Rotate", manipulator.undoRotateCharacters("eRotat", 1));
+    assertEquals("Rotate", manipulator.undoRotateCharacters("ateRot", 3));
+    assertEquals("Rotate", manipulator.undoRotateCharacters("tateRo", 10));
+
+    assertEquals("eRotat", manipulator.undoRotateCharacters("eRotat", 6));
+    assertEquals("eRotat", manipulator.undoRotateCharacters("eRotat", 0));
+    assertEquals("eRotat", manipulator.undoRotateCharacters("eRotat", 12));
+  }
 
   @Test
   public void testUndoVowelsToSymbols() {}
