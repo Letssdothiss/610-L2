@@ -38,9 +38,9 @@ public class StringManipulatorTest {
     assertEquals("", manipulator.duplicateString(""));
   }
 
-  // Testing both ways to exhaust test, since the method is used for both encryption and decryption.
   @Test
   public void testSwapCase() {
+    // Testing both ways to exhaust test, since the method is used for both encryption and decryption.
     assertEquals("iN A SENTENCE.", manipulator.swapCase("In a sentence."));
     assertEquals("In a sentence.", manipulator.swapCase("iN A SENTENCE."));
 
@@ -83,7 +83,6 @@ public class StringManipulatorTest {
     assertEquals("Rhythm", manipulator.vowelsToSymbols("Rhythm"));
     assertEquals("r", manipulator.vowelsToSymbols("r"));
     assertEquals("R", manipulator.vowelsToSymbols("R"));
-    assertEquals("!", manipulator.vowelsToSymbols("!"));
   }
 
   @Test
@@ -132,12 +131,44 @@ public class StringManipulatorTest {
   }
 
   @Test
-  public void testUndoVowelsToSymbols() {}
+  public void testUndoVowelsToSymbols() {
+    assertEquals("A", manipulator.undoVowelsToSymbols("?"));
+    assertEquals("a", manipulator.undoVowelsToSymbols("="));
+    assertEquals("E", manipulator.undoVowelsToSymbols(")"));
+    assertEquals("e", manipulator.undoVowelsToSymbols("("));
+    assertEquals("I", manipulator.undoVowelsToSymbols("!"));
+    assertEquals("i", manipulator.undoVowelsToSymbols("@"));
+    assertEquals("O", manipulator.undoVowelsToSymbols("&"));
+    assertEquals("o", manipulator.undoVowelsToSymbols("/"));
+    assertEquals("U", manipulator.undoVowelsToSymbols("*"));
+    assertEquals("u", manipulator.undoVowelsToSymbols("%"));
+    assertEquals("Manipulate a sentence.", manipulator.undoVowelsToSymbols("M=n@p%l=t( = s(nt(nc(."));
+    assertEquals("Vocabulary", manipulator.undoVowelsToSymbols("V/c=b%l=ry"));
+
+    // Non-vowel characters should not be changed.
+    assertEquals("Rhythm", manipulator.undoVowelsToSymbols("Rhythm"));
+    assertEquals("r", manipulator.undoVowelsToSymbols("r"));
+    assertEquals("R", manipulator.undoVowelsToSymbols("R"));
+  }
 
   @Test
-  public void testUndoInsertPhrase() {}
+  public void testUndoInsertPhrase() {
+    String phrase = "TESTPHRASE";
+    assertEquals("In a sentence.", manipulator.undoInsertPhrase("In a se" + phrase + "ntence."));
+    assertEquals("Word", manipulator.undoInsertPhrase("Wo" + phrase + "rd"));
+
+    assertEquals("a", manipulator.undoInsertPhrase("a"));
+    assertEquals("!", manipulator.undoInsertPhrase("!"));
+    assertEquals("", manipulator.undoInsertPhrase(""));
+  }
 
   @Test
-  public void testUndoStringToCamelCase() {}
+  public void testUndoStringToCamelCase() {
+    assertEquals("Camel case this string.", manipulator.undoStringToCamelCase("camelCaseThisString."));
+    assertEquals("CAMELcase", manipulator.undoStringToCamelCase("camelCase"));
 
+    assertEquals("a", manipulator.undoStringToCamelCase("a"));
+    assertEquals("!", manipulator.undoStringToCamelCase("!"));
+    assertEquals("", manipulator.undoStringToCamelCase(""));
+  }
 }
