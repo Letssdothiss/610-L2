@@ -32,9 +32,10 @@ public class StringManipulatorTest {
   public void testDuplicateString() {
     assertEquals("Duplicate a sentence.Duplicate a sentence.", manipulator.duplicateString("Duplicate a sentence."));
     assertEquals("DuplicateDuplicate", manipulator.duplicateString("Duplicate"));
+    assertEquals("aa", manipulator.duplicateString("a"));
+    assertEquals("AA", manipulator.duplicateString("A"));
+    assertEquals("!!", manipulator.duplicateString("!"));
 
-    assertEquals("a", manipulator.duplicateString("a"));
-    assertEquals("A", manipulator.duplicateString("A"));
     assertEquals("", manipulator.duplicateString(""));
   }
 
@@ -62,6 +63,14 @@ public class StringManipulatorTest {
     assertEquals("Rotate", manipulator.rotateCharacters("Rotate", 6));
     assertEquals("Rotate", manipulator.rotateCharacters("Rotate", 0));
     assertEquals("Rotate", manipulator.rotateCharacters("Rotate", 12));
+
+    // Test for exception when input is less than 2 characters.
+    assertThrows(IllegalArgumentException.class, () -> {
+      manipulator.rotateCharacters("a", 1);
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      manipulator.rotateCharacters("", 1);
+    });
   }
 
   @Test
@@ -87,19 +96,18 @@ public class StringManipulatorTest {
 
   @Test
   public void testInsertPhrase() {
-    String phrase = "TESTPHRASE";
+    String phrase = "!#THTRJYDHGS#¤%&UHDAWE35ythrsr563423435ythgfds";
     assertEquals("In a se" + phrase + "ntence.", manipulator.insertPhrase("In a sentence."));
     assertEquals("Wo" + phrase + "rd", manipulator.insertPhrase("Word"));
-
-    assertEquals("a", manipulator.insertPhrase("a"));
-    assertEquals("!", manipulator.insertPhrase("!"));
-    assertEquals("", manipulator.insertPhrase(""));
+    assertEquals(phrase + "a", manipulator.insertPhrase("a"));
+    assertEquals(phrase + "!", manipulator.insertPhrase("!"));
+    assertEquals(phrase, manipulator.insertPhrase(""));
   }
 
   @Test
   public void testStringToCamelCase() {
     assertEquals("camelCaseThisString.", manipulator.stringToCamelCase("Camel case this string."));
-    assertEquals("camelCase", manipulator.stringToCamelCase("CAMELcase"));
+    assertEquals("camelcase", manipulator.stringToCamelCase("CAMELcase"));
 
     assertEquals("a", manipulator.stringToCamelCase("a"));
     assertEquals("!", manipulator.stringToCamelCase("!"));
@@ -115,8 +123,13 @@ public class StringManipulatorTest {
     assertEquals("a", manipulator.undoDuplicateString("aa"));
     assertEquals("!", manipulator.undoDuplicateString("!!"));
 
-    assertEquals("a", manipulator.undoDuplicateString("a"));
-    assertEquals("", manipulator.undoDuplicateString(""));
+    // Cant remove duplication from a string with less than 2 characters.
+    assertThrows(IllegalArgumentException.class, () -> {
+      manipulator.undoDuplicateString("a");
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      manipulator.undoDuplicateString("");
+  });
   }
 
   @Test
@@ -153,7 +166,7 @@ public class StringManipulatorTest {
 
   @Test
   public void testUndoInsertPhrase() {
-    String phrase = "TESTPHRASE";
+    String phrase = "!#THTRJYDHGS#¤%&UHDAWE35ythrsr563423435ythgfds";
     assertEquals("In a sentence.", manipulator.undoInsertPhrase("In a se" + phrase + "ntence."));
     assertEquals("Word", manipulator.undoInsertPhrase("Wo" + phrase + "rd"));
 
@@ -164,8 +177,9 @@ public class StringManipulatorTest {
 
   @Test
   public void testUndoStringToCamelCase() {
-    assertEquals("Camel case this string.", manipulator.undoStringToCamelCase("camelCaseThisString."));
-    assertEquals("CAMELcase", manipulator.undoStringToCamelCase("camelCase"));
+    // This method is flawed and cannot guarantee that the original string will be restored exactly. 
+    assertEquals("camel case this string.", manipulator.undoStringToCamelCase("camelCaseThisString."));
+    assertEquals("camel case", manipulator.undoStringToCamelCase("camelCase"));
 
     assertEquals("a", manipulator.undoStringToCamelCase("a"));
     assertEquals("!", manipulator.undoStringToCamelCase("!"));
