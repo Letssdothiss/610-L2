@@ -31,11 +31,26 @@ public class EncryptionTest {
   }
 
   @Test
-  public void testCaesarCipherEncryptionWithEmptyString() {}
+  public void testCaesarCipherEncryptionWithEmptyString() {
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+      encryption.caesarCipherEncryption("", 3);
+  });
+  assertEquals("Input string must contain atleast one character.", exception.getMessage());
+  }
 
   @Test
-  public void testCaesarCipherEncryptionWithSpaceString() {}
+  public void testCaesarCipherEncryptionWithSpaceString() {
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+      encryption.caesarCipherEncryption(" ", 3);
+  });
+  assertEquals("Input string must contain atleast one character.", exception.getMessage());
+  }
 
   @Test
-    public void testCaesarCipherEncryptionWithInvalidShift() {}
+    public void testCaesarCipherEncryptionWithInvalidShift() {
+      Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        encryption.caesarCipherEncryption("Hello World", 0);
+    });
+    assertEquals("Shift value must be atleast 1.", exception.getMessage());
+    }
 }
