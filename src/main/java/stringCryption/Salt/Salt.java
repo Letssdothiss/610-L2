@@ -17,32 +17,42 @@ public class Salt {
   }
 
   /**
+   * Get the salt.
+   */
+  public String getSalt() {
+    return this.salt;
+  }
+
+  /**
    * Combine input with salt.
    */
   private String combineSaltAndInput(String salt, String input) {
-    String saltedInput = salt + input;
-    return saltedInput;
+    return salt + input;
   }
 
   /**
    * Remove salt from input.
    */
   private String removeSaltFromInput(String salt, String saltedInput) {
-    String originalInput = saltedInput.replace(salt, "");
-    return originalInput;
+    if (saltedInput.startsWith(salt)) {
+      return saltedInput.substring(salt.length());
+    } else {
+      return "No salt found in the given input.";
+    }
   }
 
   /**
    * Add Salt.
    */
   public String addSalt(String input, int lengthOfSalt) {
-    return input;
+    generateSalt(lengthOfSalt);
+    return combineSaltAndInput(salt, input);
   }
 
   /**
    * Remove Salt.
    */
   public String removeSalt(String saltedInput) {
-    return input;
+    return removeSaltFromInput(salt, saltedInput);
   }
 }
