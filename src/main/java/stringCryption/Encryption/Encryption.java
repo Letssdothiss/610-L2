@@ -49,17 +49,19 @@ public class Encryption {
   }
 
   // Level 3 Encryption.
+  int stepsToRotate = 3;
   public String levelThreeEncryption(String input) {
     String encryptedInput = levelTwoEncryption(input);
-    encryptedInput = stringManipulator.undoVowelsToSymbols(encryptedInput);
+    encryptedInput = stringManipulator.rotateCharacters(encryptedInput, stepsToRotate);
     return encryptedInput;
   }
 
   // Level 3 Decryption.
   public String levelThreeDecryption(String encryptedInput) {
-    String decryptedInput = stringManipulator.vowelsToSymbols(encryptedInput);
+    int stepsToRotate = 3;
+    String decryptedInput = stringManipulator.undoRotateCharacters(encryptedInput, stepsToRotate);
     decryptedInput = levelTwoDecryption(decryptedInput);
-    return encryptedInput;
+    return decryptedInput;
   }
 
   // Level 4 Encryption.
@@ -67,7 +69,7 @@ public class Encryption {
     int timesToShift = 6;
     String encryptedInput = levelThreeEncryption(input);
     encryptedInput = encryptionCipher.caesarCipherEncryption(encryptedInput, timesToShift);
-    return input;
+    return encryptedInput;
   }
 
   // Level 4 Decryption.
@@ -75,7 +77,7 @@ public class Encryption {
     int timesToShift = 6;
     String decryptedInput = encryptionCipher.caesarCipherDecryption(encryptedInput, timesToShift);
     decryptedInput = levelThreeDecryption(decryptedInput);
-    return encryptedInput;
+    return decryptedInput;
   }
   
   // Level 5 Encryption.
@@ -93,6 +95,6 @@ public class Encryption {
     String decryptedInput = stringManipulator.undoRotateCharacters(encryptedInput, stepsToRotate);
     decryptedInput = stringManipulator.swapCase(decryptedInput);
     decryptedInput = levelFourDecryption(decryptedInput);
-    return encryptedInput;
+    return decryptedInput;
   }
 }
