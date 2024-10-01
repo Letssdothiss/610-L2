@@ -1,9 +1,6 @@
 package main.java.stringCryption.Encryption;
 
 public class Encryption {
-  // Substitution List for Substitution Cipher
-  private final String SUBSTITUTION_LIST = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;':,.<>?";
-
   /**
    * Caesar Cipher Encryption
    * 
@@ -70,16 +67,5 @@ public class Encryption {
       throw new IllegalArgumentException("Shift value must be atleast 1.");
     }
     return caesarCipherEncryption(encryptedInput, 26 - timesToShift);
-  }
-
-  /**
-   * Substitution Cipher Encryption
-   */
-  public String substitutionCipherEncryption(String input) {
-    return input;
-  }
-
-  public String substitutionCipherDecryption(String input) {
-    return input;
   }
 }

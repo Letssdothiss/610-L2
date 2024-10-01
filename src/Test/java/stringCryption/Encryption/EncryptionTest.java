@@ -53,4 +53,36 @@ public class EncryptionTest {
     });
     assertEquals("Shift value must be atleast 1.", exception.getMessage());
     }
+
+  @Test
+  public void testCaesarCipherEncryptionWithShiftOfAlphabetLength() {
+    String expectedOutput = "This is a test.";
+    int shiftAlphabethLength = 26;
+    String actualOutput = encryption.caesarCipherEncryption(testString, shiftAlphabethLength);
+    assertEquals(expectedOutput, actualOutput, "The encrypted output should match the expected output.");
+  }
+
+  @Test
+  public void testCaesarCipherEncryptionWithShiftGreaterThanAlphabetLength() {
+    String expectedOutput = "Wklv lv d whvw.";
+    int shiftGreaterThanAlphabetLength = 29;
+    String actualOutput = encryption.caesarCipherEncryption(testString, shiftGreaterThanAlphabetLength);
+    assertEquals(expectedOutput, actualOutput, "The encrypted output should match the expected output.");
+  }
+
+  @Test
+  public void testCaesarCipherEncryptionWithAllLetters() {
+    String alphabet = "abcdefghijklmnopqrstuvwxyz";
+    String expectedOutput = "defghijklmnopqrstuvwxyzabc";
+    String actualOutput = encryption.caesarCipherEncryption(alphabet, caesarCipherShift);
+    assertEquals(expectedOutput, actualOutput, "The encrypted output should match the expected output.");
+  }
+
+  @Test
+  public void testCaesarCipherEncryptionWithNonLettercharacters() {
+    String nonLetterCharacters = "1234567890!@#$%^&*()_+";
+    String expectedOutput = "1234567890!@#$%^&*()_+";
+    String actualOutput = encryption.caesarCipherEncryption(nonLetterCharacters, caesarCipherShift);
+    assertEquals(expectedOutput, actualOutput, "The encrypted output should match the expected output.");
+  }
 }
