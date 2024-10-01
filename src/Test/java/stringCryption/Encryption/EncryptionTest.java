@@ -53,4 +53,12 @@ public class EncryptionTest {
     String decrypted = encryption.levelFiveDecryption(encrypted);
     assertEquals(input, decrypted);
   }
+
+  @Test
+  public void testLongStringEncryptionDecryption() {
+    String input = "a".repeat(100000);
+    String encrypted = encryption.levelOneEncryption(input);
+    String decrypted = encryption.levelOneDecryption(encrypted);
+    assertEquals(input, decrypted);
+  }
 }
