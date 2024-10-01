@@ -49,18 +49,43 @@ public class SaltTest {
   }
 
   @Test
-  public void testAddSaltWithSpaceInput() {}
+  public void testAddSaltWithSpaceInput() {
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+      inputSalter.addSalt(" ", saltLength);
+    });
+    assertEquals("Input string must contain atleast one character.", exception.getMessage());
+  }
 
   @Test
-  public void testAddSaltWithInvalidSaltLength() {}
+  public void testAddSaltWithInvalidSaltLength() {
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+      inputSalter.addSalt(input, 0);
+    });
+    assertEquals("Salt length must be atleast 1.", exception.getMessage());
+  }
 
   @Test
-  public void testRemoveSaltWithEmptyInput() {}
+  public void testRemoveSaltWithEmptyInput() {
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+      inputSalter.removeSalt("");
+    });
+    assertEquals("There is no salt to remove from this input.", exception.getMessage());
+  }
 
   @Test
-  public void testRemoveSaltWithSpaceInput() {}
+  public void testRemoveSaltWithSpaceInput() {
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+      inputSalter.removeSalt(" ");
+    });
+    assertEquals("There is no salt to remove from this input.", exception.getMessage());
+  }
 
   @Test
-  public void testRemoveSaltWithInvalidSaltedInput() {}
+  public void testRemoveSaltWithInvalidSaltedInputLength() {
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+      inputSalter.removeSalt("");
+    });
+    assertEquals("There is no salt to remove from this input.", exception.getMessage());
+  }
 
 }
