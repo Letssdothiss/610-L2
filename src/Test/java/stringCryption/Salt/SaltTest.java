@@ -40,4 +40,27 @@ public class SaltTest {
     assertEquals(input, unsaltedInput, "Unsalted input should be equal to the original input.");
   }
 
+  @Test
+  public void testAddSaltWithEmptyInput() {
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+      inputSalter.addSalt("", saltLength);
+    });
+    assertEquals("Input string must contain atleast one character.", exception.getMessage());
+  }
+
+  @Test
+  public void testAddSaltWithSpaceInput() {}
+
+  @Test
+  public void testAddSaltWithInvalidSaltLength() {}
+
+  @Test
+  public void testRemoveSaltWithEmptyInput() {}
+
+  @Test
+  public void testRemoveSaltWithSpaceInput() {}
+
+  @Test
+  public void testRemoveSaltWithInvalidSaltedInput() {}
+
 }
