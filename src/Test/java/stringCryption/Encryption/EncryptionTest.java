@@ -23,5 +23,19 @@ public class EncryptionTest {
   }
 
   @Test
-  public void testCaesarCipherDecryption() {}
+  public void testCaesarCipherDecryption() {
+    String encryptedString = encryption.caesarCipherEncryption(testString, caesarCipherShift);
+    String expectedOutput = testString;
+    String actualOutput = encryption.caesarCipherDecryption(encryptedString, caesarCipherShift);
+    assertEquals(expectedOutput, actualOutput, "The decrypted output should match the expected input.");
+  }
+
+  @Test
+  public void testCaesarCipherEncryptionWithEmptyString() {}
+
+  @Test
+  public void testCaesarCipherEncryptionWithSpaceString() {}
+
+  @Test
+    public void testCaesarCipherEncryptionWithInvalidShift() {}
 }
