@@ -26,10 +26,12 @@ public class Encryption {
   }
 
   // Level 1 Decryption.
-  int timesToShift = 9;
-  int saltLength = 32;
   public String levelOneDecryption(String encryptedInput) {
-    return encryptedInput;
+    int timesToShift = 9;
+    String decryptedInput = salt.removeSalt(encryptedInput);
+    decryptedInput = encryptionCipher.caesarCipherDecryption(decryptedInput, timesToShift);
+    decryptedInput = stringManipulator.reverseString(decryptedInput);
+    return decryptedInput;
   }
 
   // Level 2 Encryption.
@@ -41,7 +43,9 @@ public class Encryption {
 
   // Level 2 Decryption.
   public String levelTwoDecryption(String encryptedInput) {
-    return encryptedInput;
+    String decryptedInput = stringManipulator.undoDuplicateString(encryptedInput);
+    decryptedInput = levelOneDecryption(decryptedInput);
+    return decryptedInput;
   }
 
   // Level 3 Encryption.
@@ -53,6 +57,8 @@ public class Encryption {
 
   // Level 3 Decryption.
   public String levelThreeDecryption(String encryptedInput) {
+    String decryptedInput = stringManipulator.vowelsToSymbols(encryptedInput);
+    decryptedInput = levelTwoDecryption(decryptedInput);
     return encryptedInput;
   }
 
@@ -66,20 +72,27 @@ public class Encryption {
 
   // Level 4 Decryption.
   public String levelFourDecryption(String encryptedInput) {
+    int timesToShift = 6;
+    String decryptedInput = encryptionCipher.caesarCipherDecryption(encryptedInput, timesToShift);
+    decryptedInput = levelThreeDecryption(decryptedInput);
     return encryptedInput;
   }
   
   // Level 5 Encryption.
   public String levelFiveEncryption(String input) {
-    int saltLength = 16;
+    int stepsToRotate = 12;
     String encryptedInput = levelFourEncryption(input);
-    encryptedInput = salt.addSalt(encryptedInput, saltLength);
     encryptedInput = stringManipulator.swapCase(encryptedInput);
+    encryptedInput = stringManipulator.rotateCharacters(encryptedInput, stepsToRotate);
     return encryptedInput;
   }
 
   // Level 5 Decryption.
   public String levelFiveDecryption(String encryptedInput) {
+    int stepsToRotate = 12;
+    String decryptedInput = stringManipulator.undoRotateCharacters(encryptedInput, stepsToRotate);
+    decryptedInput = stringManipulator.swapCase(decryptedInput);
+    decryptedInput = levelFourDecryption(decryptedInput);
     return encryptedInput;
   }
 }
