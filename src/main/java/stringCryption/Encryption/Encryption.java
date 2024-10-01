@@ -48,6 +48,7 @@ public class Encryption {
     char baseCharacter = Character.isLowerCase(letterToShift) ? 'a' : 'A';
     // Shifting the letter in the alphabet, using modulo to make sure 
     // the letter cant go beyond the alphabet.
+    // (letterToShift - baseCharacter) gives the zero-based index of the letter in the alphabet.
     return (char) (((letterToShift - baseCharacter + timesToShift) % alphabetLength) + baseCharacter);
   }
 
@@ -76,14 +77,22 @@ public class Encryption {
   /**
    * Substitution Cipher Encryption & Decryption
    */
-  public String substitutionCipherEncryption(String input) {}
+  public String substitutionCipherEncryption(String input) {
+    return input;
+  }
 
-  public String substitutionCipherDecryption(String input) {}
+  public String substitutionCipherDecryption(String input) {
+    return input;
+  }
 
   /**
    * Vigenere Cipher Encryption & Decryption
    */
-  public String vigenereCipherEncryption(String input, String keyword) {}
+  public String vigenereCipherEncryption(String input, String keyword) {
+    return input;
+  }
 
-  public String vigenereCipherDecryption(String input, String keyword) {}
+  public String vigenereCipherDecryption(String input, String keyword) {
+    return input;
+  }
 }
