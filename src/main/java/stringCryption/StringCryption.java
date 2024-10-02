@@ -55,5 +55,33 @@ public class StringCryption {
   /**
    * Decrypts the input at the chosen level.
    */
-  
+  public String decryptAtChosenLevel(String encryptedInput, int level) {
+    String decryptedInput = "";
+    try {
+      switch (level) {
+        case 1:
+          decryptedInput = encryption.levelOneDecryption(encryptedInput);
+          break;
+        case 2:
+          decryptedInput = encryption.levelTwoDecryption(encryptedInput);
+          break;
+        case 3:
+          decryptedInput = encryption.levelThreeDecryption(encryptedInput);
+          break;
+        case 4:
+          decryptedInput = encryption.levelFourDecryption(encryptedInput);
+          break;
+        case 5:
+          decryptedInput = encryption.levelFiveDecryption(encryptedInput);
+          break;
+        default:
+          throw new IllegalArgumentException("Invalid level chosen. Please choose a level between 1-5.");
+      }
+    } catch (IllegalArgumentException e) {
+      System.out.println("Error when trying to decrypt the input." + e.getMessage());
+    } catch (Exception e) {
+      System.out.println("Error when trying to decrypt the input." + e.getMessage());
+    }
+    return decryptedInput;
+  }
 }
