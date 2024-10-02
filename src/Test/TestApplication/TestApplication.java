@@ -1,3 +1,10 @@
+/**
+ * The String Cryption testing application.
+ * 
+ * @author Emil Jonasson Östvall
+ * @version 1.0.0
+ */
+
 package Test.TestApplication;
 
 import main.java.stringCryption.StringCryption;

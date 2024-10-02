@@ -1,3 +1,10 @@
+/**
+ * Provides encryption and decryption methods for different levels of complexity.
+ * 
+ * @author Emil Jonasson Östvall
+ * @version 1.0.0
+ */
+
 package main.java.stringCryption;
 
 import main.java.stringCryption.Encryption.Encryption;

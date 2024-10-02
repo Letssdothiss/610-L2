@@ -1,3 +1,8 @@
+/**
+ * @author Emil Jonasson Östvall
+ * @version 1.0.0
+ */
+
 package main.java.stringCryption.Encryption;
 
 import main.java.stringCryption.EncryptionCipher.EncryptionCipher;
