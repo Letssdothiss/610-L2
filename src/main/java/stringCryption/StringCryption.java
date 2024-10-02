@@ -22,10 +22,15 @@ public class StringCryption {
    * @param level - the level of encryption complexity.
    * @return - the encrypted string.
    */
-  public String encryptAtChosenLevel(String input, int level) {
+  public String encryptAtChosenLevel(String input, int levelOfEncryption) {
+    if (levelOfEncryption < 1 || levelOfEncryption > 5) {
+      throw new IllegalArgumentException("Invalid encryption level chosen. Please choose a level between 1-5.");
+    } else if (input.length() < 1 || input.trim().length() < 1) {
+      throw new IllegalArgumentException("Input string must contain atleast one character.");
+    }
     String encryptedInput= "";
     try {
-      switch (level) {
+      switch (levelOfEncryption) {
         case 1:
           encryptedInput = encryption.levelOneEncryption(input);
           break;
@@ -55,10 +60,15 @@ public class StringCryption {
   /**
    * Decrypts the input at the chosen level.
    */
-  public String decryptAtChosenLevel(String encryptedInput, int level) {
+  public String decryptAtChosenLevel(String encryptedInput, int levelOfDecryption) {
+    if (levelOfDecryption < 1 || levelOfDecryption > 5) {
+      throw new IllegalArgumentException("Invalid decryption level chosen. Please choose a level between 1-5.");
+    } else if (encryptedInput.length() < 1 || encryptedInput.trim().length() < 1) {
+      throw new IllegalArgumentException("Input string must contain atleast one character.");
+    }
     String decryptedInput = "";
     try {
-      switch (level) {
+      switch (levelOfDecryption) {
         case 1:
           decryptedInput = encryption.levelOneDecryption(encryptedInput);
           break;
