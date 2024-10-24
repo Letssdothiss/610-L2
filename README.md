@@ -1,9 +1,22 @@
 # StringCryption Library
 # version 1.0.0
 
+## Notice Board
+
+The [notice board](./NoticeBoard.md) contains information about upcoming changes or updates that may be noteworthy.
+
+## Change Log
+
+The [change log](./ChangeLog.md) lists important changes that have been made.
+
 ## Introduction
 
 The `StringCryption` library is intended to provide a comprehensive suite of methods for encrypting and decrypting strings at various levels of complexity. Designed with flexibility in mind, this library allows users to choose from multiple encryption levels, each offering a different degree of complexity.
+
+This module could, for instance, be used in a messaging application where users can send encrypted messages to each other. You can use the `StringCryption` library to encrypt a message before sending it and upon recieving it the correct encryption level has to be entered for the message to be decrypted. This ensures that only the intended recipient can read the message, enhancing the security and privacy of the communication.
+
+For instance, you can encrypt a message with a chosen level of complexity before sending it over the network. The recipient can then decrypt the message using the same level of complexity, ensuring that the message remains confidential and secure.
+
 
 The library is now at its first release and there are known issues and conflicts present that will be resolved in future versions. Not to say that the library is unsafe to use, the known conflicts and issues are worked around and the lib is well tested to avoid side-effects.
 
@@ -98,7 +111,14 @@ public class YourMainClass {
   }
 }
 ```
-#### Methods in the public interface
+
+#### Expected Output
+```bash
+Encrypted Input: nqCyqaIW4eAr+VmiUGm0GyxVbk4fyn64YxMhBTID9nqVXo=.cyhalwn xc pwracb nqCyqaIW4eAr+VmiUGm0GyxVbk4fyn64YxMhBTID9nqVXo=.cyhalwn xc pwracb 
+Decrypted Input: The string to encrypt.
+```
+
+### Methods in the public interface
    - The public interface contains two usable methods which can result in five different outcomes each.
 
 ### `public String encryptAtChosenLevel(String input, int levelOfEncryption)`
@@ -114,6 +134,13 @@ public class YourMainClass {
    - Make sure to enter a valid encryption level (1-5 in current implementation.)
    - The same level of encryption used on an input have to be used when decrypting, else the result wont be the same.
    - If these five options are not enough, the option to create custom methods for encryption is possible if the project is cloned.
+
+## Test Application
+
+The `TestApplication` class is a simple console-based application designed to demonstrate the usage of the `StringCryption` library. It allows users to encrypt and decrypt strings using different levels of encryption complexity. The application provides a user-friendly interface to interact with the library and see the results of the encryption and decryption processes.
+
+[Test application.](./src/Test/TestApplication/TestApplication.java)<br>
+[Test application documentation.](./src/Test/TestApplication/README.md)
 
 ## Issues and bugs
 
