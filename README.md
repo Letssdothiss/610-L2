@@ -1,5 +1,5 @@
 # StringCryption Library
-# version 1.0.0
+# Version 1.0.0
 
 ## Notice Board
 
@@ -26,7 +26,7 @@ The library is now at its first release and there are known issues and conflicts
 - **Ease of Use:** Simple and intuitive API that makes it easy to integrate encryption and decryption functionalities into your projects.
 - **Customizable:** The user can either download the .jar file to simply use the implemented interface or clone the entire project and discover their own customization.
 - **Comprehensive String Manipulation:** Includes additional string manipulation methods like reversing, duplicating, rotating characters, and swapping cases.
-- **More to come** future iterations will add more options to expand the customization, security and flexibility.
+- **More to Come** future iterations will add more options to expand the customization, security and flexibility.
 
 ## How to Use
 
@@ -75,20 +75,20 @@ The library is now at its first release and there are known issues and conflicts
 
 #### Using the Command Line
 
-1. **Compile Your Project with the JAR File:**
+1. **Compile Your Project With the JAR File:**
    - Ensure the `StringCryption.jar` file is in your project's directory.
    - Compile your project with the JAR file in the classpath.
    ```sh
    javac -cp .;StringCryption.jar YourMainClass.java
    ```
 
-2. **Run Your Project with the JAR File:**
+2. **Run Your Project With the JAR File:**
    - Run your project with the JAR file in the classpath.
    ```sh
    java -cp .;StringCryption.jar YourMainClass
    ```
 
-### 3. Using the library in your code
+### 3. Using the Library in Your Code
    - Import the StringCryption class and use its methods in your code.
 
 ```java
@@ -118,7 +118,7 @@ Encrypted Input: nqCyqaIW4eAr+VmiUGm0GyxVbk4fyn64YxMhBTID9nqVXo=.cyhalwn xc pwra
 Decrypted Input: The string to encrypt.
 ```
 
-### Methods in the public interface
+### Methods in the Public Interface
    - The public interface contains two usable methods which can result in five different outcomes each.
 
 ### `public String encryptAtChosenLevel(String input, int levelOfEncryption)`
@@ -142,7 +142,7 @@ The `TestApplication` class is a simple console-based application designed to de
 [Test application.](./src/Test/TestApplication/TestApplication.java)<br>
 [Test application documentation.](./src/Test/TestApplication/README.md)
 
-## Issues and bugs
+## Issues and Bugs
 
 ### Issues
 
@@ -152,7 +152,7 @@ The `TestApplication` class is a simple console-based application designed to de
 #### stringToCamelCase & undoStringToCamelCase 
    - The stringToCamelCase method correctly transforms a string to camel case, but the undoStringToCamelCase method only creates a readable string with spaces between words.  It does not guarantee that the original string will be restored exactly as it was before the camel case conversion.
 
-### Potential bugs
+### Potential Bugs
 
 #### Duplicate String and Rotate Characters
    - If you duplicate a string and then rotate the characters, the undo methods must be called in the exact reverse order with the correct parameters to restore the original string. Any deviation in the order or parameters can result in an incorrect output.
