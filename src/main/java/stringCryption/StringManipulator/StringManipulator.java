@@ -1,108 +1,90 @@
-/**
- * @author Emil Jonasson Östvall
- * @version 1.0.0
- */
-
 package main.java.stringCryption.StringManipulator;
 
+/**
+ * This class is used to manipulate strings.
+ */
 public class StringManipulator {
-  /**
-   * This is the phrase that will be used in the insertPhrase method.
-   *
-   * @type {String}
-   */
+
+  // Phrase used in insertPhrase method.
   private static final String phrase = "!#THTRJYDHGS#¤%&UHDAWE35ythrsr563423435ythgfds";
 
-  /**
-   * Functions to Perform Manipulations.
-   */
-
-  /**
-   * This method will reverse the input string.
-   *
-   * To undo the reversed string, call this method again with 
-   * the manipulated string as the argument.
-   * 
-   * @param input - The string to be reversed.
-   * @return - The reversed string.
-   */
+  // Note: To undo the reversed string, call this method again with the manipulated string as the argument.
   public String reverseString(String input) {
     validateInput(input, 2, "Cannot reverse a string with less than 2 characters.");
-    String manipulatedString = new StringBuilder(input).reverse().toString();
-    return manipulatedString;
+    return new StringBuilder(input).reverse().toString();
   }
 
   public String duplicateString(String input) {
     validateInput(input, 1, "Cannot duplicate a string with less than 1 character/s.");
-    String manipulatedString = input + input;
-    return manipulatedString;
+    return input + input;
   }
 
-  /**
-   * Changes upper case to lower case and vice versa.
-   * 
-   * To undo the case swap, call this method again on with
-   * the manipulated string as the argument.
-   *
-   * @param input - The string to be modified.
-   * @return - The manipulated string.
-   */
+
+  // Note: To undo the case swap, call this method again on with the manipulated string as the argument.
   public String swapCase(String input) {
     validateInput(input, 1, "Cannot swap case of a string with less than 1 character/s.");
     char[] inputStringToCharacters = input.toCharArray();
     for (int i = 0; i < inputStringToCharacters.length; i++) {
-      char characterInInput = inputStringToCharacters[i];
-      if (Character.isUpperCase(characterInInput)) {
-        inputStringToCharacters[i] = Character.toLowerCase(characterInInput);
-      } else if (Character.isLowerCase(characterInInput)) {
-        inputStringToCharacters[i] = Character.toUpperCase(characterInInput);
-      }
+      inputStringToCharacters[i] = swapCharacterCase(inputStringToCharacters[i]);
     }
-    String manipulatedString = new String(inputStringToCharacters);
-    return manipulatedString;
+    return new String(inputStringToCharacters);
   }
 
-  /**
-   * This method will rotate the characters in a string by a specified number of steps.
-   * 
-   * @param input - The string to be modified.
-   * @param stepsToRotate - The number of steps to rotate the characters.
-   * @return - The manipulated string.
-   */
+  private char swapCharacterCase(char character) {
+    if (Character.isUpperCase(character)) {
+      return Character.toLowerCase(character);
+    } else if (Character.isLowerCase(character)) {
+      return Character.toUpperCase(character);
+    }
+    return character;
+  }
+
+  // This method will rotate the characters in a string by a specified number of steps.
   public String rotateCharacters(String input, int stepsToRotate) {
     validateInput(input, 2, "Cannot rotate a string with less than 2 characters.");
-    int length = input.length();
-    // Modulo is used to prevent unnecessary rotations, 
-    // while still modifying the string to the requested position.
+    int normalizedSteps = normalizeRotationSteps(stepsToRotate, input.length());
+    return rotateStringBySteps(input, normalizedSteps);
+  }
+
+  private int normalizeRotationSteps(int stepsToRotate, int length) {
     stepsToRotate = stepsToRotate % length;
     if (stepsToRotate < 0) {
       stepsToRotate += length;
     }
-    // (Characters to move) + (input string - characters to move)
-    String manipulatedString = input.substring(length - stepsToRotate) + input.substring(0, length - stepsToRotate);
-    return manipulatedString;
+    return stepsToRotate;
+  }
+
+  private String rotateStringBySteps(String input, int stepsToRotate) {
+    int length = input.length();
+    return input.substring(length - stepsToRotate) + input.substring(0, length - stepsToRotate);
   }
 
   public String vowelsToSymbols(String input) {
     validateInput(input, 1, "Cannot replace vowels in a string with less than 1 character/s.");
-    String manipulatedString = input.replace("A", "?")
-                                    .replace("a", "=")
-                                    .replace("E", ")")
-                                    .replace("e", "(")
-                                    .replace("I", "!")
-                                    .replace("i", "@")
-                                    .replace("O", "&")
-                                    .replace("o", "/")
-                                    .replace("U", "*")
-                                    .replace("u", "%");
-    return manipulatedString;
+    return input.replace("A", "?")
+                .replace("a", "=")
+                .replace("E", ")")
+                .replace("e", "(")
+                .replace("I", "!")
+                .replace("i", "@")
+                .replace("O", "&")
+                .replace("o", "/")
+                .replace("U", "*")
+                .replace("u", "%");
   }
 
   public String insertPhrase(String input) {
     validateInput(input, 2, "Cannot insert a phrase into a string with less than 2 characters.");
-    int middle = input.length() / 2;
-    String manipulatedString = input.substring(0, middle) + phrase + input.substring(middle);
-    return manipulatedString;
+    int middle = calculateMiddleIndex(input.length());
+    return insertPhraseAtPosition(input, middle);
+  }
+
+  private int calculateMiddleIndex(int length) {
+    return length / 2;
+  }
+
+  private String insertPhraseAtPosition(String input, int position) {
+    return input.substring(0, position) + phrase + input.substring(position);
   }
 
   /**
@@ -125,14 +107,15 @@ public class StringManipulator {
   }
 
   /**
+   * 
    * Functions to Undo Manipulations.
+   * 
    */
 
   public String undoDuplicateString(String manipulatedString) {
     validateInput(manipulatedString, 2, "Cant remove duplication from a string with less than 2 characters.");
-    int removeDuplication = manipulatedString.length() / 2;
-    String originalInput = manipulatedString.substring(0, removeDuplication);
-    return originalInput;
+    int halfLength = manipulatedString.length() / 2;
+    return manipulatedString.substring(0, halfLength);
   }
 
   /**
@@ -142,33 +125,27 @@ public class StringManipulator {
   public String undoRotateCharacters(String manipulatedString, int stepsToRotate) {
     validateInput(manipulatedString, 2, "Cannot rotate a string with less than 2 characters.");
     int length = manipulatedString.length();
-    stepsToRotate = stepsToRotate % length;
-    if (stepsToRotate < 0) {
-      stepsToRotate += length;
-    }
-    String originalInput = rotateCharacters(manipulatedString, length - stepsToRotate);
-    return originalInput;
+    int normalizedSteps = normalizeRotationSteps(stepsToRotate, length);
+    return rotateCharacters(manipulatedString, length - normalizedSteps);
   }
 
   public String undoVowelsToSymbols(String manipulatedString) {
     validateInput(manipulatedString, 1, "Cannot replace vowels in a string with less than 1 character/s.");
-    String originalInput = manipulatedString.replace("?", "A")
-                                            .replace("=", "a")
-                                            .replace(")", "E")
-                                            .replace("(", "e")
-                                            .replace("!", "I")
-                                            .replace("@", "i")
-                                            .replace("&", "O")
-                                            .replace("/", "o")
-                                            .replace("*", "U")
-                                            .replace("%", "u");
-    return originalInput;
+    return manipulatedString.replace("?", "A")
+                            .replace("=", "a")
+                            .replace(")", "E")
+                            .replace("(", "e")
+                            .replace("!", "I")
+                            .replace("@", "i")
+                            .replace("&", "O")
+                            .replace("/", "o")
+                            .replace("*", "U")
+                            .replace("%", "u");
   }
 
   public String undoInsertPhrase(String manipulatedString) {
     validateInput(manipulatedString, 2, "Cannot insert a phrase into a string with less than 2 characters.");
-    String originalInput = manipulatedString.replace(phrase, "");
-    return originalInput;
+    return manipulatedString.replace(phrase, "");
   }
 
   /**
@@ -200,7 +177,7 @@ public class StringManipulator {
   }
 
   private void validateInput(String input, int minLength, String errorMessage) {
-    if (input.length() < minLength || input .trim().isEmpty()) {
+    if (input == null || input.length() < minLength || input.trim().isEmpty()) {
       throw new IllegalArgumentException(errorMessage);
     }
   }
