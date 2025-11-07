@@ -1,6 +1,5 @@
 package Test.java.stringCryption.Salt;
 
-import java.util.Base64;
 import main.java.stringCryption.Salt.Salt;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,14 +21,6 @@ public class SaltTest {
     String saltedInput = inputSalter.addSalt(input, saltLength);
     
     assertTrue(saltedInput.length() > input.length(), "Salted input should be longer than input.");
-  }
-
-  @Test
-  public void testGetSalt() {
-    inputSalter.addSalt(input, saltLength);
-    String salt = inputSalter.getSalt();
-
-    assertEquals(saltLength, Base64.getDecoder().decode(salt).length, "Salt length should be equal to the specified length.");
   }
 
   @Test

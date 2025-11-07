@@ -1,38 +1,49 @@
-/**
- * @author Emil Jonasson Östvall
- * @version 1.0.0
- */
-
 package main.java.stringCryption.Salt;
 
 import java.security.SecureRandom;
 import java.util.Base64;
 
+/**
+ * This class is used to add and remove salt from a string.
+ */
 public class Salt {
   private String salt;
 
-  /**
-   * Generate a random salt at specified length.
-   * Using secure random and base64 encoding.
-   */
-  private void generateSalt(int lengthOfSalt) {
-    if (lengthOfSalt < 1) {
-      throw new IllegalArgumentException("Salt length must be greater than 0.");
+  private void validateInputString(String input, String errorMessage) {
+    if (input == null || input.trim().isEmpty()) {
+      throw new IllegalArgumentException(errorMessage);
     }
-    SecureRandom randomSalt = new SecureRandom();
-    byte[] saltBytes = new byte[lengthOfSalt];
-    randomSalt.nextBytes(saltBytes);
-    this.salt = Base64.getEncoder().encodeToString(saltBytes);
   }
 
-  /**
-   * Get the salt.
-   *
-   * Not used in current implementation, could be used to store salt 
-   * for later decoding.
-   */
-  public String getSalt() {
-    return this.salt;
+  private void validateSaltLength(int lengthOfSalt, String errorMessage) {
+    if (lengthOfSalt < 1) {
+      throw new IllegalArgumentException(errorMessage);
+    }
+  }
+
+  private void validateSaltedInput(String salt, String saltedInput) {
+    if (saltedInput == null || saltedInput.length() == 0 || !saltedInput.startsWith(salt)) {
+      throw new IllegalArgumentException("Invalid salted input.");
+    }
+  }
+
+  private void generateSalt(int lengthOfSalt) {
+    validateSaltLength(lengthOfSalt, "Salt length must be greater than 0.");
+    byte[] saltBytes = generateRandomBytes(lengthOfSalt);
+    this.salt = encodeToBase64(saltBytes);
+  }
+
+  // Generate random bytes using SecureRandom.
+  // Seems appropriate in this case to break the rule of small functions, keeping this logic at the same place.
+  private byte[] generateRandomBytes(int length) {
+    SecureRandom randomSalt = new SecureRandom();
+    byte[] saltBytes = new byte[length];
+    randomSalt.nextBytes(saltBytes);
+    return saltBytes;
+  }
+
+  private String encodeToBase64(byte[] bytes) {
+    return Base64.getEncoder().encodeToString(bytes);
   }
 
   private String combineSaltAndInput(String salt, String input) {
@@ -40,30 +51,19 @@ public class Salt {
   }
 
   private String removeSaltFromInput(String salt, String saltedInput) {
-    if (saltedInput.length() == 0 || !saltedInput.startsWith(salt)) {
-       throw new IllegalArgumentException("Invalid ");
-    }
-    if (saltedInput.startsWith(salt)) {
-      return saltedInput.substring(salt.length());
-    } else {
-      return "No salt found in the given input.";
-    }
+    validateSaltedInput(salt, saltedInput);
+    return saltedInput.substring(salt.length());
   }
 
   public String addSalt(String input, int lengthOfSalt) {
-    if (input.length() < 1 || input == " ") {
-      throw new IllegalArgumentException("Input string must contain atleast one character.");
-    } else if (lengthOfSalt < 1) {
-      throw new IllegalArgumentException("Salt length must be atleast 1.");
-    }
+    validateInputString(input, "Input string must contain atleast one character.");
+    validateSaltLength(lengthOfSalt, "Salt length must be atleast 1.");
     generateSalt(lengthOfSalt);
     return combineSaltAndInput(salt, input);
   }
 
   public String removeSalt(String saltedInput) {
-    if (saltedInput.length() < 1 || saltedInput == " ") {
-      throw new IllegalArgumentException("There is no salt to remove from this input.");
-    }
+    validateInputString(saltedInput, "There is no salt to remove from this input.");
     return removeSaltFromInput(salt, saltedInput);
   }
 }
