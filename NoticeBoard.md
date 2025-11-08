@@ -16,7 +16,6 @@ Changes listed here should not affect the usage of the module.
 
 | ETA | Description | Note |
 |-----|-------------|------|
-| ETA Coming Soon | Refactoring code base | Should not affect usage of module. |
 | ETA Coming Soon | Fixes to algorithms currently not working. | Should not affect usage of module. Algorithms are not implemented in encryption logic. |
 
 ## Minor Updates/Bug Fixes
@@ -31,6 +30,4 @@ Changes listed here are mainly regarding non-code or bug fixes.
 
 Here you can find a summary of ongoing work.
 
-- Major refactoring of the code base.
 - Bug fixing some algorithms that are not functioning as intended. (Not implemented in encryption logic so module usage is unaffected.)
-- Continous changes to the documentation will be done during the refactoring.

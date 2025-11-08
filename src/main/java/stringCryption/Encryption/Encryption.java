@@ -1,15 +1,19 @@
-/**
- * @author Emil Jonasson Östvall
- * @version 1.0.0
- */
-
 package main.java.stringCryption.Encryption;
 
 import main.java.stringCryption.EncryptionCipher.EncryptionCipher;
 import main.java.stringCryption.Salt.Salt;
 import main.java.stringCryption.StringManipulator.StringManipulator;
 
+/**
+ * The Encryption class is responsible for encrypting and decrypting the input string.
+ */
 public class Encryption {
+  private static final int LEVEL_ONE_SHIFT = 9;
+  private static final int LEVEL_ONE_SALT_LENGTH = 32;
+  private static final int LEVEL_THREE_ROTATION_STEPS = 3;
+  private static final int LEVEL_FOUR_SHIFT = 6;
+  private static final int LEVEL_FIVE_ROTATION_STEPS = 12;
+
   private EncryptionCipher encryptionCipher;
   private Salt salt;
   private StringManipulator stringManipulator;
@@ -22,19 +26,16 @@ public class Encryption {
 
   // Level 1 Encryption.
   public String levelOneEncryption(String input) {
-    int timesToShift = 9;
-    int saltLength = 32;
     String encryptedInput = stringManipulator.reverseString(input);
-    encryptedInput = encryptionCipher.caesarCipherEncryption(encryptedInput, timesToShift);
-    encryptedInput = salt.addSalt(encryptedInput, saltLength);
+    encryptedInput = encryptionCipher.caesarCipherEncryption(encryptedInput, LEVEL_ONE_SHIFT);
+    encryptedInput = salt.addSalt(encryptedInput, LEVEL_ONE_SALT_LENGTH);
     return encryptedInput;
   }
 
   // Level 1 Decryption.
   public String levelOneDecryption(String encryptedInput) {
-    int timesToShift = 9;
     String decryptedInput = salt.removeSalt(encryptedInput);
-    decryptedInput = encryptionCipher.caesarCipherDecryption(decryptedInput, timesToShift);
+    decryptedInput = encryptionCipher.caesarCipherDecryption(decryptedInput, LEVEL_ONE_SHIFT);
     decryptedInput = stringManipulator.reverseString(decryptedInput);
     return decryptedInput;
   }
@@ -54,50 +55,44 @@ public class Encryption {
   }
 
   // Level 3 Encryption.
-  int stepsToRotate = 3;
   public String levelThreeEncryption(String input) {
     String encryptedInput = levelTwoEncryption(input);
-    encryptedInput = stringManipulator.rotateCharacters(encryptedInput, stepsToRotate);
+    encryptedInput = stringManipulator.rotateCharacters(encryptedInput, LEVEL_THREE_ROTATION_STEPS);
     return encryptedInput;
   }
 
   // Level 3 Decryption.
   public String levelThreeDecryption(String encryptedInput) {
-    int stepsToRotate = 3;
-    String decryptedInput = stringManipulator.undoRotateCharacters(encryptedInput, stepsToRotate);
+    String decryptedInput = stringManipulator.undoRotateCharacters(encryptedInput, LEVEL_THREE_ROTATION_STEPS);
     decryptedInput = levelTwoDecryption(decryptedInput);
     return decryptedInput;
   }
 
   // Level 4 Encryption.
   public String levelFourEncryption(String input) {
-    int timesToShift = 6;
     String encryptedInput = levelThreeEncryption(input);
-    encryptedInput = encryptionCipher.caesarCipherEncryption(encryptedInput, timesToShift);
+    encryptedInput = encryptionCipher.caesarCipherEncryption(encryptedInput, LEVEL_FOUR_SHIFT);
     return encryptedInput;
   }
 
   // Level 4 Decryption.
   public String levelFourDecryption(String encryptedInput) {
-    int timesToShift = 6;
-    String decryptedInput = encryptionCipher.caesarCipherDecryption(encryptedInput, timesToShift);
+    String decryptedInput = encryptionCipher.caesarCipherDecryption(encryptedInput, LEVEL_FOUR_SHIFT);
     decryptedInput = levelThreeDecryption(decryptedInput);
     return decryptedInput;
   }
   
   // Level 5 Encryption.
   public String levelFiveEncryption(String input) {
-    int stepsToRotate = 12;
     String encryptedInput = levelFourEncryption(input);
     encryptedInput = stringManipulator.swapCase(encryptedInput);
-    encryptedInput = stringManipulator.rotateCharacters(encryptedInput, stepsToRotate);
+    encryptedInput = stringManipulator.rotateCharacters(encryptedInput, LEVEL_FIVE_ROTATION_STEPS);
     return encryptedInput;
   }
 
   // Level 5 Decryption.
   public String levelFiveDecryption(String encryptedInput) {
-    int stepsToRotate = 12;
-    String decryptedInput = stringManipulator.undoRotateCharacters(encryptedInput, stepsToRotate);
+    String decryptedInput = stringManipulator.undoRotateCharacters(encryptedInput, LEVEL_FIVE_ROTATION_STEPS);
     decryptedInput = stringManipulator.swapCase(decryptedInput);
     decryptedInput = levelFourDecryption(decryptedInput);
     return decryptedInput;
